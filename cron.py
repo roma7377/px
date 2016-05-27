@@ -43,3 +43,10 @@ for i in slaves_list:
 
 
 db.close()
+
+def slave_read_info(port,id):
+    instrument = minimalmodbus.Instrument(port, id)
+    n = instrument.read_register(0)
+    serial_number = instrument.read_string(1,5)
+    sw_version = instrument.read_string(6, 2)
+    n = instrument.read_registers(21,2*n)
